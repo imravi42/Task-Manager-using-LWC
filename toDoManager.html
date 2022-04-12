@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Task Manager">
+        <lightning-layout class="slds-align_absolute-center slds-text-align_center container" multiple-rows="true ">
+            
+            <lightning-layout-item size="12" padding="around-small">
+                <div class="time">{time}</div> 
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" padding="around-small">
+                <div class="greeting">{greeting}</div>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12">
+            <div class="slds-text-heading_large slds-m-vertical_large">Have some task today? Please Jot it down</div>
+            </lightning-layout-item>
+
+
+            <lightning-layout-item size="12" large-device-size="6" medium-device-size="10" small-device-size="12" class="slds-m-top_large">
+                <lightning-layout>
+                    <lightning-layout-item size="12">
+                         
+                    <lightning-input  type="text" label="Let's add some Task in here" 
+                        placeholder="Let's add some Task in here" variant="label-hidden" oncommit={addToDoHandler}>
+
+                        </lightning-input>
+                       
+                    </lightning-layout-item>
+                </lightning-layout>
+                
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small">
+                 <div class="slds-m-top_large slds-text-heading_label">UPCOMING TASKS</div>
+                 <template for:each={upcomingTasks} for:item="todo">
+                     <c-todo-uc-list key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName}
+                        onupdate={updateTodoHandler} ondelete={deleteTodoHandler}>
+
+                     </c-todo-uc-list>
+                 </template>
+
+<div class="slds-m-top_large slds-text-heading_label">COMPLETED TASKS</div>
+<template for:each={completedTasks} for:item="todo">
+                     <c-todo-uc-list key={todo.todoId} todo-id={todo.todoId} todo-name={todo.todoName} done
+                     onupdate={updateTodoHandler} ondelete={deleteTodoHandler}>
+
+                     </c-todo-uc-list>
+                 </template>
+</lightning-layout-item>
+</lightning-layout>
+</lightning-card>
+</template>
